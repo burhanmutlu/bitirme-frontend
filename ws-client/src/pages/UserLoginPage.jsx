@@ -1,11 +1,9 @@
 import React from "react";
 import { login } from "../api/apiCalls";
-import Input from "../component/input";
 import {Link} from "react-router-dom";
 
 
 class UserLoginPage extends React.Component {
-
 
     state = {
         email: null,
@@ -38,7 +36,9 @@ class UserLoginPage extends React.Component {
         this.setState({ pendingApiCall: true });
 
         try {
-            await login(body);
+            await login(body).then(response => {
+                localStorage.setItem("token", response.data.token);
+            })
             push("/");
         } catch (error) {
             if (error.response.data.validationMessage) {
@@ -76,9 +76,6 @@ class UserLoginPage extends React.Component {
                                                     <input className="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password" onChange={this.onChange} />
                                                 </div>
                                                 <button className="btn btn-primary d-block btn-user w-100" onClick={this.onClickLogin} disabled={pendingApiCall}> {pendingApiCall && <span className="spinner-border spinner-border-sm"></span>} Sign In </button>
-                                                <hr />
-                                                <Link className="btn btn-primary d-block btn-google btn-user w-100 mb-2" to="/" role="button">
-                                                    <i className="fab fa-google"></i>&nbsp; Login with Google </Link>
                                                 <hr />
                                             </form>
                                             <div className="text-center">

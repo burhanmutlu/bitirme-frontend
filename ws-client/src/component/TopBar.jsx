@@ -1,9 +1,19 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
 /*rcc yaz*/
 class TopBar extends Component {
+
+    onClickLogout = () => {
+        const action = {
+            type: 'logout-success'
+        };
+        this.props.dispatch(action);
+    }
+
     render() {
+        const {t, username, isLoggedIn} = this.props;
         return (
             <nav className="navbar navbar-expand-md bg-body py-3">
                 <div className="container">
@@ -28,4 +38,11 @@ class TopBar extends Component {
     }
 }
 
-export default TopBar;
+const mapStateToProps = (store) => {
+    return {
+        isLoggedIn: store.isLoggedIn,
+        username: store.username
+    };
+};
+
+export default connect(mapStateToProps)(TopBar);

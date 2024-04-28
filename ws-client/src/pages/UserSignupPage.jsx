@@ -134,8 +134,6 @@ class UserSignupPage extends React.Component {
                                             {pendingApiCall && <span className="spinner-border spinner-border-sm"></span>} Sign Up
                                         </button>
                                         <hr/>
-                                            <Link className="btn btn-primary d-block btn-google btn-user w-100 mb-2" to="/" role="button">
-                                                <i className="fab fa-google"></i>&nbsp; Register with Google </Link>  <hr/>
                                     </form>
                                     <div className="text-center">
                                         <Link className="small" to="forgot-password.html">Forgot Password?</Link>
